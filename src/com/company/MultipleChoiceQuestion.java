@@ -5,30 +5,29 @@ import java.util.Scanner;
 public class MultipleChoiceQuestion extends Question{
     //Fields
     String[] answerSet;
-    String answer;
 
     //Constructor
     public MultipleChoiceQuestion(String aQuestion, String[] anAnswerSet, String anAnswer) {
-        super(aQuestion);
+        super(aQuestion, anAnswer);
         answerSet = anAnswerSet;
-        answer = anAnswer;
     }
 
     // Getters/Setters
-    public String[] getAnswerSet() {
-
-        return answerSet;
+    public String getAnswerSet() {
+        String answerSetString = "";
+        for (String option : answerSet) {
+            answerSetString += option + "   ";
+        }
+        return answerSetString;
     }
     public void setAnswerSet(String[] answerSet) { this.answerSet = answerSet; }
-    public String getAnswer() { return answer; }
-    public void setAnswer(String answer) { this.answer = answer; }
 
     //Methods
     public int askMultipleChoice(){
         Scanner mcScanner = new Scanner(System.in);
         System.out.println(getQuestion() + "\n" + "\nOptions: " + getAnswerSet());
         String userResponse = mcScanner.nextLine();
-        if (userResponse == this.answer) {
+        if (userResponse.equals(answer)) {
             System.out.println("That is correct!");
             return 1;
         } else {
